@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kort skapare</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <div class="control-panel-inner">
+        <h1>Kort Skapare</h1>
+        <div class="control-panel-buttons">
+          <button id="clear-btn" class="clear-btn">Clear All</button>
+          <span id="save-status" class="save-status"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container for both pages -->
+    <div class="pages-container">
+      <!-- Page 1: Card Fronts -->
+      <div class="print-page" id="card-fronts-page">
+        <div class="card-grid" id="card-fronts-grid">
+          <!-- Card fronts will be dynamically generated here -->
+        </div>
+      </div>
+
+      <!-- Page 2: Card Backs -->
+      <div class="print-page" id="card-backs-page">
+        <div class="card-grid" id="card-backs-grid">
+          <!-- Card backs will be dynamically generated here -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

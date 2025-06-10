@@ -1,0 +1,271 @@
+/* Custom CSS for print layout, overriding some Tailwind defaults for specific print needs */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 16px;
+  background-color: #f3f4f6; /* Equivalent to bg-gray-100 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Control panel styles */
+.control-panel {
+  width: 100%;
+  max-width: calc(210mm * 2 + 20mm); /* Accommodate two pages side-by-side */
+  background-color: #ffffff; /* bg-white */
+  padding: 16px; /* p-4 */
+  border-radius: 8px; /* rounded-lg */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-md */
+  margin-bottom: 24px; /* mb-6 */
+  margin-left: auto; /* mx-auto */
+  margin-right: auto; /* mx-auto */
+  box-sizing: border-box;
+}
+
+.control-panel-inner {
+  display: flex; /* flex */
+  justify-content: space-between; /* justify-between */
+  align-items: center; /* items-center */
+}
+
+.control-panel h1 {
+  font-size: 24px; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  color: #1f2937; /* text-gray-800 */
+  margin: 0;
+}
+
+.control-panel-buttons {
+  display: flex; /* flex */
+  gap: 8px; /* gap-2 */
+}
+
+.clear-btn {
+  background-color: #ef4444; /* bg-red-500 */
+  color: #ffffff; /* text-white */
+  padding: 8px 16px; /* px-4 py-2 */
+  border-radius: 4px; /* rounded */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out; /* transition-colors */
+  font-family: 'Inter', sans-serif;
+}
+
+.clear-btn:hover {
+  background-color: #dc2626; /* hover:bg-red-600 */
+}
+
+.save-status {
+  font-size: 14px; /* text-sm */
+  color: #6b7280; /* text-gray-500 */
+  align-self: center; /* self-center */
+}
+
+/* Container for both pages when displayed side-by-side */
+.pages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20mm; /* Gap between pages when stacked vertically */
+}
+
+/* Media query for side-by-side layout on larger screens */
+@media screen and (min-width: calc(210mm * 2 + 20mm)) {
+  .pages-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20mm; /* Gap between pages when side-by-side */
+    align-items: flex-start;
+  }
+}
+
+.print-page {
+  width: 210mm; /* A4 width */
+  height: 297mm; /* A4 height */
+  margin: 12mm 0; /* Vertical margin for screen viewing */
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the grid within the page */
+  align-content: flex-start; /* Align content to the top */
+  padding: 19mm 12mm; /* Padding around the grid on the page */
+  box-sizing: border-box; /* Include padding in width/height */
+  flex-shrink: 0; /* Prevent pages from shrinking */
+}
+
+.card-container {
+  width: 3.5in; /* Standard business card width */
+  height: 2in; /* Standard business card height */
+  margin: 0.125in; /* Small margin between cards */
+  border-radius: 0.5rem; /* Rounded corners for cards */
+  overflow: hidden; /* Hide overflow for content */
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* subtle shadow for cards */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Prevent cards from shrinking */
+}
+
+.card-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.card-front {
+  position: relative; /* For positioning the upload overlay */
+  cursor: pointer; /* Indicate clickability */
+  background-color: #e0e0e0; /* Placeholder background */
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the card area without distortion */
+  border-radius: 0.5rem;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.card-front:hover .upload-overlay {
+  opacity: 1; /* Show on hover */
+}
+
+.upload-overlay span {
+  font-size: 2rem; /* Plus icon size */
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.card-back textarea {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  resize: none; /* Prevent manual resizing by user */
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif; /* Ensure consistent font */
+  background-color: #ffffff; /* White background for textarea */
+  color: #333;
+  overflow-y: auto; /* Allow scrolling if text exceeds height */
+}
+
+/* Hidden utility class */
+.hidden {
+  display: none;
+}
+
+/* Print-specific styles */
+@media print {
+  body {
+    background-color: #ffffff; /* White background for print */
+    margin: 0;
+    padding: 0 !important;
+  }
+
+  .pages-container {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .print-page {
+    height: unset;
+    margin: 0; /* No external margins when printing */
+    padding-bottom: 0;
+    box-shadow: none; /* No shadow on print */
+    /* Remove page-break-after: always to eliminate blank pages */
+  }
+
+  /* Ensure the second page (backs) starts on a new page */
+  #card-backs-page {
+    page-break-before: always; /* Only force page break before the backs page */
+    transform: scaleX(-1); /* Horizontally flip the entire back page */
+  }
+
+  .card-container {
+    margin: 0.125in; /* Maintain internal margins for card spacing */
+    box-shadow: none; /* No shadow on print */
+  }
+
+  /* Hide elements not needed for printing */
+  .info-panel,
+  .upload-overlay,
+  .file-input,
+  .control-panel {
+    display: none !important; /* Hide info panel, upload overlay, file inputs, and control panel when printing */
+  }
+
+  .card-back textarea {
+    border: none !important; /* Remove border from textarea when printing */
+    background-color: transparent !important; /* Transparent background when printing */
+    -webkit-print-color-adjust: exact; /* Ensure background color prints if needed */
+    color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Mirror individual card content back to readable orientation */
+  #card-backs-page .card-content {
+    transform: scaleX(-1); /* Flip the content back so text is readable */
+  }
+
+  /* Ensure the grid layout is also mirrored properly */
+  #card-backs-page .card-grid {
+    transform: scaleX(
+      -1
+    ); /* Also flip the grid to maintain proper positioning */
+  }
+
+  /* Flip the grid content back */
+  #card-backs-page .card-grid .card-container {
+    transform: scaleX(-1);
+  }
+}
+
+/* Layout the 2x4 grid within the page */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-rows: repeat(4, 1fr); /* 4 rows */
+  gap: 6mm; /* Gap between rows and columns of cards */
+  width: calc(
+    2 * 3.5in + 1 * 6mm
+  ); /* Calculate grid width based on card size and gap */
+  height: calc(
+    4 * 2in + 3 * 6mm
+  ); /* Calculate grid height based on card size and gap */
+  justify-content: center; /* Center the grid within the flex container */
+  align-items: center; /* Center the grid within the flex container */
+}
